@@ -1,0 +1,3 @@
+{
+    "*.ts?(x)":["eslit --fix", "prettier --write"]
+}

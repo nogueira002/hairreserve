@@ -1,4 +1,4 @@
-import { SearchIcon } from "lucide-react"
+import { FootprintsIcon, SearchIcon } from "lucide-react"
 import Header from "./_components/header"
 import { Button } from "./_components/ui/button"
 import { Input } from "./_components/ui/input"
@@ -12,6 +12,11 @@ import BarberShopItem from "./_components/barbershop-item"
 
 const Home = async () => {
   const barbershops = await db.barbershop.findMany({})
+  const pupularBarberShops = await db.barbershop.findMany({
+    orderBy: {
+      name: "desc",
+    },
+  })
 
   return (
     <div>
@@ -21,6 +26,7 @@ const Home = async () => {
         {/*  Texto  */}
         <h2 className="text-xl font-bold">Ola, Ricardo!</h2>
         <p>Segunda-feira, 05 de agosto.</p>
+
         {/*  busca  */}
         <div className="mt-6 flex items-center gap-2">
           <Input placeholder="Pesquisar..." />
@@ -28,6 +34,41 @@ const Home = async () => {
             <SearchIcon />
           </Button>
         </div>
+
+        {/*  busca rapida */}
+        <div className="mt-6 flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+          <Button className="gap-2" variant="secondary">
+            <Image src="/cabelo.svg" width={16} height={16} alt="Cabelo" />
+            Cabelo
+          </Button>
+          <Button className="gap-2" variant="secondary">
+            <Image src="/barba.svg" width={16} height={16} alt="Barba " />
+            Barba
+          </Button>
+          <Button className="gap-2" variant="secondary">
+            <Image
+              src="/acabamentos.svg"
+              width={16}
+              height={16}
+              alt="Acabamento"
+            />
+            Acabamentos
+          </Button>
+          <Button className="gap-2" variant="secondary">
+            <FootprintsIcon size={16} />
+            Pedicure
+          </Button>
+          <Button className="gap-2" variant="secondary">
+            <Image
+              src="/acabamentos.svg"
+              width={16}
+              height={16}
+              alt="Acabamento"
+            />
+            Mánicure
+          </Button>
+        </div>
+
         {/*  Banner  */}
         <div className="relative mt-6 h-[150px] w-full">
           <Image
@@ -37,6 +78,7 @@ const Home = async () => {
             className="rounded-xl object-cover"
           />
         </div>
+
         {/*  agendamento  */}
         <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
           Agendamentos
@@ -62,6 +104,8 @@ const Home = async () => {
             </div>
           </CardContent>
         </Card>
+
+        {/*  Recomendados  */}
         <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
           Recomendados
         </h2>
@@ -70,7 +114,25 @@ const Home = async () => {
             <BarberShopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
+        {/*  Populares  */}
+        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
+          Populares
+        </h2>
+        <div className="flex gap-2 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {pupularBarberShops.map((barbershop) => (
+            <BarberShopItem key={barbershop.id} barbershop={barbershop} />
+          ))}
+        </div>
       </div>
+      <footer>
+        <Card>
+          <CardContent className="px-6 py-5">
+            <p className="text-sm text-gray-400">
+              2024 Copyright <span className="font-bold">HairReserve</span>
+            </p>
+          </CardContent>
+        </Card>
+      </footer>
     </div>
   )
 }

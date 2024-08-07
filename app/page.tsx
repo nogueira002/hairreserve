@@ -1,14 +1,12 @@
-import { FootprintsIcon, SearchIcon } from "lucide-react"
+import { SearchIcon } from "lucide-react"
 import Header from "./_components/header"
 import { Button } from "./_components/ui/button"
 import { Input } from "./_components/ui/input"
-import { Badge } from "./_components/ui/badge"
-import { Avatar } from "./_components/ui/avatar"
 import Image from "next/image"
 import { Card, CardContent } from "./_components/ui/card"
-import { AvatarImage } from "@radix-ui/react-avatar"
 import { db } from "./_lib/prisma"
 import BarberShopItem from "./_components/barbershop-item"
+import BookingItem from "./_components/booking-item"
 
 const Home = async () => {
   const barbershops = await db.barbershop.findMany({})
@@ -55,17 +53,26 @@ const Home = async () => {
             Acabamentos
           </Button>
           <Button className="gap-2" variant="secondary">
-            <FootprintsIcon size={16} />
-            Pedicure
+            <Image
+              src="/sobrancelha.svg"
+              width={16}
+              height={16}
+              alt="Sobrancelha"
+            />
+            Sobrancelha
+          </Button>
+          <Button className="gap-2" variant="secondary">
+            <Image src="/massagem.svg" width={16} height={16} alt="Massagem" />
+            Massagem
           </Button>
           <Button className="gap-2" variant="secondary">
             <Image
-              src="/acabamentos.svg"
+              src="/hidratacao.svg"
               width={16}
               height={16}
-              alt="Acabamento"
+              alt="Hidratacao"
             />
-            Mánicure
+            Hidratacao
           </Button>
         </div>
 
@@ -80,30 +87,7 @@ const Home = async () => {
         </div>
 
         {/*  agendamento  */}
-        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
-          Agendamentos
-        </h2>
-        <Card>
-          <CardContent className="flex justify-between p-0">
-            {/*  Esquerda  */}
-            <div className="flex flex-col gap-2 py-5 pl-5">
-              <Badge className="w-fit">Confimado</Badge>
-              <h3 className="font-semibold">Corte de Cabelo</h3>
-              <div className="flex items-center gap-2">
-                <Avatar className="h-6 w-6">
-                  <AvatarImage src="https://utfs.io/f/c97a2dc9-cf62-468b-a851-bfd2bdde775f-16p.png" />
-                </Avatar>
-                <p>Barbearia HairRN</p>
-              </div>
-            </div>
-            {/*  Direita  */}
-            <div className="flex flex-col items-center justify-center border-l-2 border-solid px-5">
-              <p className="text-sm">Agosto</p>
-              <p className="text-2xl">05</p>
-              <p className="text-sm">09:20</p>
-            </div>
-          </CardContent>
-        </Card>
+        <BookingItem />
 
         {/*  Recomendados  */}
         <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">

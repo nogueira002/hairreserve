@@ -3,7 +3,6 @@ import Header from "./_components/header"
 import { Button } from "./_components/ui/button"
 import { Input } from "./_components/ui/input"
 import Image from "next/image"
-import { Card, CardContent } from "./_components/ui/card"
 import { db } from "./_lib/prisma"
 import BarberShopItem from "./_components/barbershop-item"
 import BookingItem from "./_components/booking-item"
@@ -108,15 +107,6 @@ const Home = async () => {
           ))}
         </div>
       </div>
-      <footer>
-        <Card>
-          <CardContent className="px-6 py-5">
-            <p className="text-sm text-gray-400">
-              2024 Copyright <span className="font-bold">HairReserve</span>
-            </p>
-          </CardContent>
-        </Card>
-      </footer>
     </div>
   )
 }
